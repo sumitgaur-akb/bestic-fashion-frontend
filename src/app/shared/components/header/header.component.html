@@ -1,0 +1,44 @@
+<header class="topbar">
+  <a class="logo" routerLink="/"><span>Bestic</span>Fashion</a>
+  <form class="search">
+    <input placeholder="Search for products, brands and more" />
+    <button type="submit">Search</button>
+  </form>
+  <nav class="actions">
+    @if (!auth.currentUser() || auth.isCustomer()) {
+      <a routerLink="/cart">Cart</a>
+    }
+    @if (auth.isSeller()) {
+      <a routerLink="/seller/dashboard">Seller Panel</a>
+    }
+    @if (auth.isAdmin()) {
+      <a routerLink="/admin/sellers">Admin Panel</a>
+    }
+    <div class="profile">
+      <button type="button" (click)="menuOpen.set(!menuOpen())">{{ auth.currentUser()?.fullName || 'Profile' }}</button>
+      @if (menuOpen()) {
+        <div class="dropdown">
+          @if (!auth.currentUser()) {
+            <a routerLink="/login">Customer Login / Register</a>
+            <a routerLink="/seller/login">Login as Seller</a>
+          }
+          @if (auth.isCustomer()) {
+            <a routerLink="/orders">My Orders</a>
+            <a routerLink="/addresses">Addresses</a>
+            <a routerLink="/profile">Profile</a>
+          }
+          @if (auth.isSeller()) {
+            <a routerLink="/seller/dashboard">Dashboard</a>
+            <a routerLink="/seller/onboarding">Onboarding Status</a>
+          }
+          @if (auth.isAdmin()) {
+            <a routerLink="/admin/sellers">Seller Review</a>
+            <a routerLink="/admin/categories">Product QC</a>
+            <a routerLink="/admin/users">Users</a>
+          }
+          @if (auth.currentUser()) { <button type="button" (click)="auth.logout()">Logout</button> }
+        </div>
+      }
+    </div>
+  </nav>
+</header>
