@@ -2,3 +2,46 @@
 > flipshop-frontend@1.0.0 start
 > ng serve --host 127.0.0.1 --port 4200
 
+Initial chunk files | Names                         |  Raw size | Estimated transfer size
+polyfills.js        | polyfills                     |  33.71 kB |                11.02 kB
+main.js             | main                          |  14.87 kB |                 3.19 kB
+chunk-ONNPEAKX.js   | -                             |   1.62 kB |               556 bytes
+styles.css          | styles                        |   1.51 kB |               581 bytes
+chunk-7M5ASTDK.js   | -                             | 819 bytes |               819 bytes
+chunk-JDGUL4A5.js   | -                             | 622 bytes |               622 bytes
+chunk-2H62Y4JR.js   | -                             | 291 bytes |               291 bytes
+
+                    | Initial total                 |  53.39 kB |                17.01 kB
+
+Lazy chunk files    | Names                         |  Raw size | Estimated transfer size
+chunk-R5VTS2JJ.js   | seller-auth-component         |  11.68 kB |                 2.73 kB
+chunk-EAHFRFHX.js   | checkout-component            |   9.63 kB |                 2.27 kB
+chunk-PA77M4XS.js   | manage-sellers-component      |   9.09 kB |                 1.90 kB
+chunk-WNI4PYKY.js   | seller-onboarding-component   |   7.69 kB |                 1.88 kB
+chunk-GJPT4OHZ.js   | manage-categories-component   |   6.82 kB |                 1.90 kB
+chunk-VVIT2CEI.js   | cart-component                |   6.51 kB |                 1.64 kB
+chunk-MZOXPWBA.js   | products-component            |   6.46 kB |                 1.66 kB
+chunk-6ITBHMAA.js   | seller-products-component     |   6.30 kB |                 1.77 kB
+chunk-URUC56K4.js   | seller-product-form-component |   5.83 kB |                 1.74 kB
+chunk-R5GTTGMA.js   | addresses-component           |   5.55 kB |                 1.55 kB
+chunk-YQJC5JIQ.js   | product-detail-component      |   5.54 kB |                 1.56 kB
+chunk-LDU34DUU.js   | home-component                |   5.31 kB |                 1.51 kB
+chunk-7G2EOG2C.js   | auth-component                |   5.12 kB |                 1.41 kB
+chunk-U3OZ2URV.js   | seller-orders-component       |   5.09 kB |                 1.44 kB
+chunk-42ZDFJ2S.js   | seller-dashboard-component    |   4.01 kB |                 1.19 kB
+...and 17 more lazy chunks files. Use "--verbose" to show all the files.
+
+Application bundle generation complete. [7.519 seconds]
+
+Watch mode enabled. Watching for file changes...
+  ➜  Local:   http://127.0.0.1:4200/
+Initial chunk files | Names                 | Raw size | Estimated transfer size
+main.js             | main                  | 14.87 kB |                 3.20 kB
+
+Lazy chunk files    | Names                 | Raw size | Estimated transfer size
+chunk-QSDMADWQ.js   | seller-auth-component | 11.15 kB |                 2.60 kB
+chunk-QEODPMRX.js   | checkout-component    |  9.11 kB |                 2.20 kB
+
+Application bundle generation complete. [1.530 seconds]
+
+Page reload sent to client(s).

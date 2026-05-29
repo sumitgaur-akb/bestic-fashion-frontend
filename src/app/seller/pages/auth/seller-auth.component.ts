@@ -33,7 +33,6 @@ import { ToastService } from '../../../core/services/toast.service';
 
           <div class="otp-row">
             <button class="btn secondary" type="button" (click)="sendEmailOtp()" [disabled]="registerForm.controls.email.invalid">Send Email OTP</button>
-            @if (devOtp()) { <span class="dev-otp">Dev OTP: {{ devOtp() }}</span> }
           </div>
 
           <label class="field required">Email OTP<input formControlName="emailOtp" maxlength="6" /></label>
@@ -52,11 +51,10 @@ import { ToastService } from '../../../core/services/toast.service';
       </div>
     </section>
   `,
-  styles: [`.seller-auth-hero{background:linear-gradient(90deg,#071b45 0%,#163b8f 55%,#1b9aaa);color:#fff;border-radius:8px;padding:28px;margin-bottom:16px}.seller-auth-hero p{margin:0 0 8px;color:#ffd34d;font-weight:900;text-transform:uppercase;font-size:12px}.seller-auth-hero h1{max-width:760px;margin:0;font-size:clamp(28px,4vw,44px);line-height:1.08}.seller-auth-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.card h2{margin-top:0}.required::after{content:' *';color:#dc2626;font-weight:900}small{display:block;color:#dc2626;margin:-6px 0 10px;font-weight:700}.otp-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}.dev-otp{font-size:12px;color:#0f766e;font-weight:900}.verified{color:#0f766e;font-weight:900;margin:10px 0}.btn[disabled]{opacity:.55;cursor:not-allowed}@media(max-width:760px){.seller-auth-grid{grid-template-columns:1fr}.otp-row{align-items:stretch;flex-direction:column}}`]
+  styles: [`.seller-auth-hero{background:linear-gradient(90deg,#071b45 0%,#163b8f 55%,#1b9aaa);color:#fff;border-radius:8px;padding:28px;margin-bottom:16px}.seller-auth-hero p{margin:0 0 8px;color:#ffd34d;font-weight:900;text-transform:uppercase;font-size:12px}.seller-auth-hero h1{max-width:760px;margin:0;font-size:clamp(28px,4vw,44px);line-height:1.08}.seller-auth-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.card h2{margin-top:0}.required::after{content:' *';color:#dc2626;font-weight:900}small{display:block;color:#dc2626;margin:-6px 0 10px;font-weight:700}.otp-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}.verified{color:#0f766e;font-weight:900;margin:10px 0}.btn[disabled]{opacity:.55;cursor:not-allowed}@media(max-width:760px){.seller-auth-grid{grid-template-columns:1fr}.otp-row{align-items:stretch;flex-direction:column}}`]
 })
 export class SellerAuthComponent {
   emailVerified = signal(false);
-  devOtp = signal<string | null>(null);
 
   loginForm = this.fb.nonNullable.group({
     emailOrMobile: ['', Validators.required],
@@ -86,7 +84,6 @@ export class SellerAuthComponent {
     }
     this.auth.sendOtp({ destination: email, purpose: 'Registration' }).subscribe({
       next: (res: any) => {
-        this.devOtp.set(/^[0-9]{6}$/.test(res.data) ? res.data : null);
         this.toast.success('OTP sent', `Verification OTP sent to ${email}.`);
       },
       error: err => this.toast.error('OTP failed', err.error?.message || 'Unable to send OTP.')

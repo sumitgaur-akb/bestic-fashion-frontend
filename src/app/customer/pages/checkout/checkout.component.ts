@@ -36,7 +36,6 @@ import { ToastService } from '../../../core/services/toast.service';
             <h2>Order confirmation</h2>
             <div class="otp-row">
               <button class="btn secondary" type="button" (click)="sendOtp()">Send order OTP</button>
-              @if (devOtp()) { <span>Dev OTP: {{ devOtp() }}</span> }
             </div>
             <label class="field">OTP<input [(ngModel)]="otp" name="otp" maxlength="6" /></label>
             <button class="btn" type="submit" [disabled]="placing() || !otp">Place order</button>
@@ -58,12 +57,11 @@ import { ToastService } from '../../../core/services/toast.service';
       }
     </section>
   `,
-  styles: [`.toolbar a{color:#2874f0;font-weight:800;text-decoration:none}.checkout-grid{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:16px}.panel{display:grid;gap:12px}.panel h2,.summary h2{margin:0}.hint{margin:0;color:#64748b;font-size:13px}.payment{display:grid;gap:10px}.payment label{display:flex;gap:10px;align-items:center;font-weight:800}.otp-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.otp-row span{color:#0f766e;font-weight:900}.summary{align-self:start;display:grid;gap:12px}.summary-row,.total{display:flex;justify-content:space-between;gap:16px}.summary-row span{color:#64748b}.total{border-top:1px solid #e5e7eb;padding-top:12px}.total strong{font-size:24px;color:#0f766e}.empty{display:grid;gap:12px;justify-items:start}@media(max-width:760px){.checkout-grid{grid-template-columns:1fr}}`]
+  styles: [`.toolbar a{color:#2874f0;font-weight:800;text-decoration:none}.checkout-grid{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:16px}.panel{display:grid;gap:12px}.panel h2,.summary h2{margin:0}.hint{margin:0;color:#64748b;font-size:13px}.payment{display:grid;gap:10px}.payment label{display:flex;gap:10px;align-items:center;font-weight:800}.otp-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.summary{align-self:start;display:grid;gap:12px}.summary-row,.total{display:flex;justify-content:space-between;gap:16px}.summary-row span{color:#64748b}.total{border-top:1px solid #e5e7eb;padding-top:12px}.total strong{font-size:24px;color:#0f766e}.empty{display:grid;gap:12px;justify-items:start}@media(max-width:760px){.checkout-grid{grid-template-columns:1fr}}`]
 })
 export class CheckoutComponent implements OnInit {
   cart = signal<any | null>(null);
   addresses = signal<any[]>([]);
-  devOtp = signal<string | null>(null);
   placing = signal(false);
   addressId = 0;
   paymentMethod: 'COD' | 'Online' = 'COD';
@@ -81,7 +79,7 @@ export class CheckoutComponent implements OnInit {
 
   sendOtp() {
     this.orders.confirmationOtp().subscribe({
-      next: (res: any) => { this.devOtp.set(/^[0-9]{6}$/.test(res.data) ? res.data : null); this.toast.success('OTP sent', 'Check the customer email for order confirmation.'); },
+      next: () => { this.toast.success('OTP sent', 'Check the customer email for order confirmation.'); },
       error: err => this.toast.error('OTP failed', err.error?.message || 'Unable to send order OTP.')
     });
   }
