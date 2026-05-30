@@ -4,6 +4,7 @@ import { ApiService } from './api.service';
 @Injectable({ providedIn: 'root' })
 export class SellerService {
   constructor(private api: ApiService) {}
+  onboarding() { return this.api.get('/sellers/onboarding'); }
   submitOnboarding(payload: unknown) { return this.api.post('/sellers/onboarding', payload); }
   adminSellerSummary() { return this.api.get('/adminsellers/summary'); }
   adminSellers() { return this.api.get('/adminsellers'); }
