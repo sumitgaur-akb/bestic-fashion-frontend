@@ -5,18 +5,25 @@ Deploy this folder to Vercel.
 ## Vercel Settings
 
 ```txt
-Root Directory: frontend
-Install Command: npm install
+Framework Preset: Angular
+Root Directory: bestic-fashion-frontend
+Install Command: npm ci
 Build Command: npm run build:vercel
 Output Directory: dist/flipshop-frontend/browser
 ```
 
 ## Environment Variables
 
-Set this in Vercel after the Render backend is deployed:
+Set this in Vercel before deploying:
 
 ```txt
-API_BASE_URL=https://YOUR_RENDER_BACKEND.onrender.com/api
+API_BASE_URL=https://YOUR_BACKEND_DOMAIN/api
 ```
 
-The build writes `src/assets/runtime-config.js` with this API URL.
+For a Railway backend, use the public Railway backend URL, for example:
+
+```txt
+API_BASE_URL=https://YOUR_RAILWAY_BACKEND.up.railway.app/api
+```
+
+The Vercel build writes `src/assets/runtime-config.js` with this API URL. The deployed config disables long-term caching for that file so future API URL changes take effect quickly.
