@@ -30,6 +30,7 @@
     }
   ],
   "rewrites": [
+    { "source": "/api/(.*)", "destination": "https://bestic-fashion-backend.onrender.com/api/$1" },
     { "source": "/((?!assets/|.*\\..*).*)", "destination": "/index.html" }
   ]
 }
