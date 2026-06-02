@@ -5,9 +5,10 @@
     "node": "20.x"
   },
   "scripts": {
-    "start": "ng serve",
-    "build": "ng build",
-    "build:vercel": "node scripts/write-runtime-config.mjs && ng build",
+    "start": "node scripts/write-runtime-config.mjs local && ng serve",
+    "build": "node scripts/write-runtime-config.mjs local && ng build",
+    "build:production": "node scripts/write-runtime-config.mjs production && ng build",
+    "build:vercel": "node scripts/write-runtime-config.mjs production && ng build",
     "test": "ng test"
   },
   "dependencies": {
