@@ -38,12 +38,22 @@ export class AuthComponent {
     if (this.loginForm.invalid) { this.toast.error('Login details missing', 'Email/mobile and password are required.'); return; }
     this.auth.login(this.loginForm.getRawValue()).subscribe({
       next: res => {
-        if (!res.data.roles.includes('Customer')) {
-          this.auth.logout();
-          this.toast.error('Customer account not found', 'Please login with a customer account.');
-          this.router.navigateByUrl('/login');
+        if (res.data.roles.includes('Admin')) {
+          this.toast.success('Admin login successful', res.message);
+          this.router.navigateByUrl('/admin/sellers');
           return;
         }
+
+        if (res.data.roles.includes('Seller')) {
+          this.toast.success('Seller login successful', res.message);
+          this.router.navigateByUrl(res.data.sellerStatus === 'Approved'
+            ? '/seller/dashboard'
+            : res.data.sellerStatus === 'PendingKyc'
+              ? '/seller/onboarding'
+              : '/seller/pending');
+          return;
+        }
+
         this.toast.success('Login successful', res.message);
         this.router.navigateByUrl('/');
       },
